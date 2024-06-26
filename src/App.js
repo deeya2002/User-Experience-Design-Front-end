@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  Route,
+  BrowserRouter as Router,
+  Routes
+} from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Register from './pages/Register';
+import Homepage from './pages/Homepage';
+
+// for showing toast messages
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import EditProfile from './pages/EditProfile';
+import ForgotPasswordCode from './pages/ForgetPasswordCode';
+import Login from './pages/Login';
+import ProfilePage from './pages/ProfilePage';
+import ResetPassword from './pages/ResetPassword';
+import SeeProfile from './pages/SeeProfile';
+import SendEmail from './pages/SendEmail';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navbar />
+      <ToastContainer />
+      <Routes>
+        <Route path='/home' element={<Homepage />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/profile' element={<ProfilePage />} />
+        <Route path='/editprofile' element={<EditProfile />} />
+        <Route path='/seeprofile' element={<SeeProfile />} />
+        <Route path='/sendemail' element={<SendEmail />} />
+        <Route path='/resetcode' element={<ForgotPasswordCode />} />
+        <Route path='/resetpassword' element={<ResetPassword />} />
+
+
+      </Routes>
+
+    </Router>
   );
 }
 
