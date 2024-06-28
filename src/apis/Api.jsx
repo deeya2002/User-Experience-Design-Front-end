@@ -25,6 +25,15 @@ export const registerApi = (data) => Api.post("/api/user/create", data)
 // Create login api
 export const loginApi = (data) => Api.post("/api/user/login", data)
 
+// Create journal api
+export const createJournalApi = (data) => Api.post("/api/post/create_post", data)
+
+export const getAllPostsApi = () =>
+  Api.get ('/api/post/get_posts');
+
+export const getSinglePost = () =>
+  Api.get ('/api/post/get_post/:id');
+
 //Forget password Apis
 export const sendEmailApi = data => Api.post ('/api/user/resetpassword', data);
 

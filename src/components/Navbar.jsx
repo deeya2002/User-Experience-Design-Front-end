@@ -23,11 +23,11 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-white">
+      <nav className="navbar navbar-expand-lg navbar-light bg-white" style={{ fontFamily: "Times New Roman", fontSize: "18px" }}>
         <div className="container-fluid">
-          <Link className="navbar-brand text-danger fw-bold" to="/">
+          <Link className="navbar-brand text-dark fw-bold" to="/">
             <img src={logo} alt="Logo" style={{ height: "50px", marginRight: "10px" }} />
-            Travel Log
+            <span style={{ fontWeight: "bold" }}>Travel Log</span>
           </Link>
           <button
             className="navbar-toggler"

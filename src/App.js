@@ -4,14 +4,17 @@ import {
   Routes
 } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Register from './pages/Register';
 import Homepage from './pages/Homepage';
+import Register from './pages/Register';
 
 // for showing toast messages
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import JournalForm from './components/JournalForm';
 import EditProfile from './pages/EditProfile';
 import ForgotPasswordCode from './pages/ForgetPasswordCode';
+import Galleryy from './pages/Galleryy';
+import JournalPage from './pages/JournalPage';
 import Login from './pages/Login';
 import ProfilePage from './pages/ProfilePage';
 import ResetPassword from './pages/ResetPassword';
@@ -34,8 +37,9 @@ function App() {
         <Route path='/sendemail' element={<SendEmail />} />
         <Route path='/resetcode' element={<ForgotPasswordCode />} />
         <Route path='/resetpassword' element={<ResetPassword />} />
-
-
+        <Route path='/journal' element={<JournalPage />} />
+        <Route path="/add-journal" element={<JournalForm />} />
+        <Route path="/gallery" element={<Galleryy/>} />
       </Routes>
 
     </Router>
