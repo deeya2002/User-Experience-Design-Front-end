@@ -1,47 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { loginApi } from '../apis/Api';
 import '../css/loginstyle.css';
+import { login } from '../redux/actions/authActions';
 
 const LoginForm = () => {
-  const [email, setEmail] = useState ('');
-  const [password, setPassword] = useState ('');
-  const navigate = useNavigate ();
+  const initialState = { email: "", password: "" };
+  const navigate = useNavigate();
+  const { auth } = useSelector((state) => state);
+  const [userData, setUserData] = useState(initialState);
+  const dispatch = useDispatch();
 
-  const changeEmail = e => {
-    setEmail (e.target.value);
+  useEffect(() => {
+    if (auth.token) {
+      navigate("/home");
+    }
+  }, [auth.token, navigate]);
+
+  const { email, password } = userData;
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserData({ ...userData, [name]: value });
   };
 
-  const changePassword = e => {
-    setPassword (e.target.value);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(login(userData));
   };
 
-  const handleSubmit = e => {
-    e.preventDefault ();
-
-    const data = {
-      email: email,
-      password: password,
-    };
-
-    loginApi (data)
-      .then (res => {
-        if (res.data.success === false) {
-          toast.error (res.data.message);
-        } else {
-          toast.success (res.data.message);
-          localStorage.setItem ('token', res.data.token);
-          const convertedJson = JSON.stringify (res.data.userData);
-          localStorage.setItem ('user', convertedJson);
-          navigate ('/home');
-        }
-      })
-      .catch (err => {
-        console.log (err);
-        toast.error ('Server Error');
-      });
-  };
   return (
     <div>
       <div className="heading">
@@ -52,23 +39,21 @@ const LoginForm = () => {
         <div className="form-container">
           <h1>Sign In</h1>
           <p>Welcome Back! Please Sign in to your account</p>
-          <form onSubmit={handleSubmit} >
+          <form onSubmit={handleSubmit}>
             <div className="input-group">
-              <label htmlFor="email">Email or Username</label>
-              <input type="text" id="email"   name="email" 
-              onChange={changeEmail} required />
+              <label htmlFor="email">Email </label>
+              <input type="text" id="email" name="email" value={email} onChange={handleChange} required />
             </div>
             <div className="input-group">
               <label htmlFor="password">Password</label>
-              <input type="password" id="password" name="password" 
-               onChange={changePassword} required />
+              <input type="password" id="password" name="password" value={password} onChange={handleChange} required />
             </div>
             <div className="checkbox-container">
               <input type="checkbox" id="remember-me" />
               <label htmlFor="remember-me">Remember Me</label>
             </div>
             <Link to="/sendemail">Forgot password?</Link>
-            <button  type="submit" onClick={handleSubmit}>Log In</button>
+            <button type="submit">Log In</button>
           </form>
           <p>Don't have an account? <Link to="/register">Register now</Link></p>
         </div>
