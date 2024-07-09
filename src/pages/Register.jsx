@@ -1,66 +1,63 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, {useState} from 'react';
+import { Link, useNavigate} from 'react-router-dom';
+import {toast} from 'react-toastify';
+import {registerApi} from '../apis/Api';
 import '../css/regstyle.css';
-import { register } from "../redux/actions/authActions.js";
 
 const Register = () => {
-  const initialState = {
-    username: "",
-    fullname: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+  //step: 1 creating a state variable
+  const [fullname, setFullName] = useState ('');
+  const [username, setUserName] = useState ('');
+  const [email, setEmail] = useState ('');
+  const [password, setPassword] = useState ('');
+  const navigate = useNavigate ();
+
+  // step 2 : Create a function for changing the state variable
+  const changeFullName = e => {
+    setFullName (e.target.value);
   };
-  const [showpass, setShowpass] = useState(false);
-  const [showcfpass, setShowcfpass] = useState(false);
-  const [userData, setuserData] = useState(initialState);
-  const { username, fullname, email, password, confirmPassword } = userData;
-
-  const { auth, alert } = useSelector((state) => state);
-  const dispatch = useDispatch();
-  const history = useNavigate();
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setuserData({ ...userData, [name]: value });
+  const changeUserName = e => {
+    setUserName (e.target.value);
+  };
+  const changeEmail = e => {
+    setEmail (e.target.value);
+  };
+  const changePassword = e => {
+    setPassword (e.target.value);
   };
 
-  useEffect(() => {
-    if (auth.token) {
-      history.push("/");
-    }
-  }, [auth.token, history]);
+  //handle after clicking the submit button
+  const handleSubmit = e => {
+    e.preventDefault ();
+    //step1: check data in console
+    console.log (fullname, username, email, password);
 
-  useEffect(() => {
-    if (alert) {
-      for (const key in alert) {
-        if (alert[key]) {
-          toast.error(alert[key]);
+    // Creating json data (fieldname: values name)
+    const data = {
+      fullName: fullname,
+      userName: username,
+      email: email,
+      password: password,
+    };
+
+    //Step: 2 Send data to backend
+    registerApi (data)
+      .then (res => {
+        console.log (res.data);
+        if (res.data.success === true) {
+          toast.success (res.data.message);
+          navigate ('/login');
+        } else {
+          toast.error (res.data.message);
         }
-      }
-    }
-  }, [alert]);
-
-  useEffect(() => {
-    if (auth.success) {
-      toast.success("Registration successful! Redirecting to login...");
-      setTimeout(() => {
-        history("/login");
-      }, 2000);
-    }
-  }, [auth.success, history]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(register(userData));
+      })
+      .catch (err => {
+        console.log (err);
+        toast.error ('Internal Server Error');
+      });
   };
-
   return (
     <div className="container">
-      <ToastContainer />
       <div className="form-container">
         <h1>Register Now</h1>
         <p>Register now to start your journey</p>
@@ -72,7 +69,7 @@ const Register = () => {
               id="fullname"
               name="fullname"
               value={fullname}
-              onChange={handleChange}
+              onChange={changeFullName}
               placeholder={alert.fullname ? `${alert.fullname}` : "Fullname"}
               style={{ background: `${alert.fullname ? "#fa8e96" : ""}` }}
               required
@@ -85,7 +82,7 @@ const Register = () => {
               id="username"
               name="username"
               value={username.toLowerCase().replace(/ /g, "")}
-              onChange={handleChange}
+              onChange={changeUserName}
               placeholder={alert.username ? `${alert.username}` : "Username"}
               style={{ background: `${alert.username ? "#fa8e96" : ""}` }}
               required
@@ -98,7 +95,7 @@ const Register = () => {
               id="email"
               name="email"
               value={email}
-              onChange={handleChange}
+              onChange={changeEmail}
               placeholder={alert.email ? `${alert.email}` : "Email"}
               style={{ background: `${alert.email ? "#fa8e96" : ""}` }}
               required
@@ -107,40 +104,25 @@ const Register = () => {
           <div className="input-group">
             <label htmlFor="password">Password</label>
             <input
-              type={showpass ? "text" : "password"}
+              type="password"
               id="password"
               name="password"
               value={password}
-              onChange={handleChange}
-              placeholder={alert.password ? `${alert.password}` : "Password"}
-              style={{ background: `${alert.password ? "#fa8e96" : ""}` }}
+              onChange={changePassword}
+              placeholder="Enter your password"
               required
             />
-            <small
-              className="register-showpass hover-pointer"
-              onClick={() => setShowpass(!showpass)}
-            >
-              {showpass ? "Hide" : "Show"}
-            </small>
           </div>
           <div className="input-group">
             <label htmlFor="confirm-password">Confirm Password</label>
             <input
-              type={showcfpass ? "text" : "password"}
+              type= "password"
               id="confirm-password"
               name="confirmPassword"
-              value={confirmPassword}
-              onChange={handleChange}
-              placeholder={alert.confirmPassword ? `${alert.confirmPassword}` : "Confirm Password"}
-              style={{ background: `${alert.confirmPassword ? "#fa8e96" : ""}` }}
+              onChange={changePassword}
+              placeholder= "Confirm Password"
               required
             />
-            <small
-              className="register-showcfpass hover-pointer"
-              onClick={() => setShowcfpass(!showcfpass)}
-            >
-              {showcfpass ? "Hide" : "Show"}
-            </small>
           </div>
           <button type="submit">Sign Up</button>
         </form>

@@ -14,7 +14,7 @@ body {
 .hero {
   background-image: url('/public/assets/images/abc.png');
   /* Replace with your image path */
-  height: 100vh;
+  height: 50vh;
   background-size: cover;
   background-position: center;
   display: flex;
