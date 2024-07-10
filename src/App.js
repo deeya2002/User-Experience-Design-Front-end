@@ -16,6 +16,9 @@ import JournalPage from './pages/JournalPage';
 import Login from './pages/Login';
 import ResetPassword from './pages/ResetPassword';
 import SendEmail from './pages/SendEmail';
+import ProfilePage from './pages/ProfilePage';
+import SingleJournalPage from './pages/SingleJournalPage';
+
 
 
 function App() {
@@ -27,7 +30,7 @@ function App() {
         <Route path='/home' element={<Homepage />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
-        {/* <Route path='/profile' element={<ProfilePage />} />
+        {/*
         <Route path='/editprofile' element={<EditProfile />} /> */}
         {/* <Route path='/seeprofile' element={<SeeProfile />} /> */}
         <Route path='/sendemail' element={<SendEmail />} />
@@ -35,6 +38,9 @@ function App() {
         <Route path='/resetpassword' element={<ResetPassword />} />
         <Route path='/journal' element={<JournalPage />} />
         <Route path='/add-journal' element={<AddJournalPage />} />
+        <Route path='/journal/:_id' element={<SingleJournalPage />} />
+        <Route path='/profile' element={<ProfilePage />} />
+
 
         {/* <Route element={<UserRoutes />}>
           <Route path='/profile' element={<h1>Profile</h1>} />

@@ -6,9 +6,8 @@ import '../css/journalstyle.css';
 const JournalPage = () => {
   const navigate = useNavigate();
   const [journals, setJournals] = useState([]);
-  const [error, setError] = useState(null); // Added state to handle errors
-  const [loading, setLoading] = useState(true); // Added state to handle loading
-
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchJournals = async () => {
@@ -16,7 +15,6 @@ const JournalPage = () => {
         const response = await getAllJournalsApi();
         if (response.data && response.data.Journals) {
           setJournals(response.data.Journals);
-          console.log('All journal data fetched', response.data.Journals);
         }
       } catch (err) {
         console.error('Failed to fetch journals:', err);
@@ -28,6 +26,9 @@ const JournalPage = () => {
     fetchJournals();
   }, []);
 
+  const handleReadMore = (id) => {
+    navigate(`/journal/${id}`);
+  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -49,9 +50,11 @@ const JournalPage = () => {
                 style={{ width: '250px', height: '160px', borderRadius: '5px', float: 'right' }}
               />
               <h3>{journal.journalName}</h3>
-              <p>{journal.journalDescription}</p>
-              <button type="button" onClick={() => navigate(`/journal/${journal._id}`)}>
-                Read More...
+              <p>
+                {`${journal.journalDescription.substring(0, 100)}...`} {/* Adjust the character limit as needed */}
+              </p>
+              <button type="button" onClick={() => handleReadMore(journal._id)}>
+                Read More
               </button>
             </section>
           ))

@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { createJournalApi } from '../apis/Api'; // Ensure this API method is implemented
 import '../css/AddJournalPage.css'; // Import the CSS file
 
 const AddJournalPage = () => {
-  const navigate = useNavigate();
   const [journalName, setJournalName] = useState('');
   const [journalDescription, setJournalDescription] = useState('');
   const [journalLocation, setJournalLocation] = useState('');
-
   const [journalImageUrl, setJournalImageUrl] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
-
-  const [error, setError] = useState(null);
+  const [error] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,57 +35,77 @@ const AddJournalPage = () => {
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
-    console.log(file);
-    setJournalImageUrl(file);
-    setPreviewImage(URL.createObjectURL(file));
+    if (file) {
+      setJournalImageUrl(file);
+      setPreviewImage(URL.createObjectURL(file));
+    }
+  };
+
+  const handleClickImage = () => {
+    document.getElementById('journalImage').click();
   };
 
   return (
     <div className="add-journal-container">
-      <h2>Add New Journal</h2>
+      <h2>Create a Journal</h2>
       {error && <p>{error}</p>}
       <form onSubmit={handleSubmit}>
-        <label>
-          Journal Name:
-          <input
-            type="text"
-            value={journalName}
-            onChange={(e) => setJournalName(e.target.value)}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          Description:
-          <textarea
-            value={journalDescription}
-            onChange={(e) => setJournalDescription(e.target.value)}
-            required
-          />
-        </label>
-        <br />
         <div className="image-upload">
-          <input onChange={handleImageUpload} type="file" id="journalImage" />
-          <label htmlFor="journalImage">Click to upload photo</label>
+          <input
+            onChange={handleImageUpload}
+            type="file"
+            id="journalImage"
+            style={{ display: 'none' }} // Hide the default file input
+          />
+          <label htmlFor="journalImage" onClick={handleClickImage}>
+            {previewImage ? (
+              <img
+                src={previewImage}
+                alt="Preview"
+                className="image-preview"
+                onClick={(e) => e.stopPropagation()} // Prevent clicks from bubbling up
+              />
+            ) : (
+              'Add Image'
+            )}
+          </label>
           {previewImage && (
-            <img
-              src={previewImage}
-              alt="Preview"
-              className="image-preview img-fluid rounded object-cover mt-2"
-            />
+            <button type="button" onClick={() => setPreviewImage(null)}>
+              Remove Image
+            </button>
           )}
         </div>
-        <br />
-        <label>
-          Journal Location:
-          <input
-            type="text"
-            value={journalLocation}
-            onChange={(e) => setJournalLocation(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Add Journal</button>
+        <div className="form-group">
+          <label>
+            Journal Name:
+            <input
+              type="text"
+              value={journalName}
+              onChange={(e) => setJournalName(e.target.value)}
+              required
+            />
+          </label>
+          <br />
+          <label>
+            Description:
+            <textarea
+              value={journalDescription}
+              onChange={(e) => setJournalDescription(e.target.value)}
+              required
+            />
+          </label>
+          <br />
+          <label>
+            Journal Location:
+            <input
+              type="text"
+              value={journalLocation}
+              onChange={(e) => setJournalLocation(e.target.value)}
+              required
+            />
+          </label>
+          <button type="submit">Upload Journal</button>
+        </div>
       </form>
     </div>
   );
