@@ -9,26 +9,25 @@ const JournalPage = () => {
   const [error, setError] = useState(null); // Added state to handle errors
   const [loading, setLoading] = useState(true); // Added state to handle loading
 
+
   useEffect(() => {
     const fetchJournals = async () => {
       try {
-        const res = await getAllJournalsApi();
-        // Check if the data structure is correct
-        if (res.data && Array.isArray(res.data.journals)) {
-          setJournals(res.data.journals);
-        } else {
-          console.error('Unexpected data structure:', res.data);
+        const response = await getAllJournalsApi();
+        if (response.data && response.data.Journals) {
+          setJournals(response.data.Journals);
+          console.log('All journal data fetched', response.data.Journals);
         }
       } catch (err) {
         console.error('Failed to fetch journals:', err);
-        setError('Failed to fetch journals.');
+        setError('Failed to fetch journals');
       } finally {
         setLoading(false);
       }
     };
-
     fetchJournals();
   }, []);
+
 
   if (loading) {
     return <p>Loading...</p>;

@@ -26,7 +26,7 @@ export const loginApi = data => Api.post ('/api/auth/login', data);
 
 // create restaurant API
 export const createJournalApi = formData =>
-  Api.post ('/api/journal/create', formData);
+  Api.post ('/api/journal/create', formData, config);
 
 // get journal api
 export const getAllJournalsApi = () => 
