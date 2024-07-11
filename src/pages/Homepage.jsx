@@ -86,7 +86,7 @@ const Homepage = () => {
           {journals.map((journal) => (
               console.log("helo"+ journal.createdBy),
             <div key={journal._id} className="journal-item">
-              <p>By {journal.createdBy}</p>
+              <p>By {journal.userDetails.username}</p>
             
               <p className="journal-location">{journal.journalLocation}</p>
               <img src={journal.journalImageUrl} alt={journal.journalName} className="journal-image" />

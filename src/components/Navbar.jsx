@@ -12,8 +12,8 @@ const Navbar = ({ size, setShow }) => {
     window.location.reload();
   };
 
-   // Get user data from local storage
-   const user = JSON.parse(localStorage?.getItem("user")) || null;
+  // Get user data from local storage
+  const user = JSON.parse(localStorage?.getItem("user")) || null;
 
   const handlePassword = () => {
     navigate("/sendemail");

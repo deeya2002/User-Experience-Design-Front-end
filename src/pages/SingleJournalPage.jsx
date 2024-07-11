@@ -1,7 +1,7 @@
+import { faBookmark, faHeart, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faBookmark, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { followUserApi, getSingleJournalApi, likeJournalApi, saveJournalApi } from '../apis/Api';
 import '../css/journalstyle.css';
 
@@ -20,9 +20,9 @@ const SingleJournalPage = () => {
       try {
         const response = await getSingleJournalApi(_id);
         setJournalDetails(response.data.journal);
-        setIsFollowing(response.data.journal.isFollowing);  // Assuming the API returns this info
-        setIsLiked(response.data.journal.isLiked);          // Assuming the API returns this info
-        setIsSaved(response.data.journal.isSaved);          // Assuming the API returns this info
+        setIsFollowing(response.data.journal.isFollowing);  
+        setIsLiked(response.data.journal.isLiked);          
+        setIsSaved(response.data.journal.isSaved);          
       } catch (err) {
         console.error('Error fetching journal details:', err);
         setError('Failed to fetch journal details');
@@ -34,8 +34,12 @@ const SingleJournalPage = () => {
   }, [_id]);
 
   const handleFollow = async () => {
+    const data = {
+      followeeId: journalDetails.createdBy
+    };
+
     try {
-      await followUserApi(journalDetails.createdBy._id);
+      await followUserApi(data);
       setIsFollowing(!isFollowing);
     } catch (err) {
       console.error('Error following user:', err);
@@ -89,7 +93,7 @@ const SingleJournalPage = () => {
   if (!journalDetails) {
     return <p>No journal details found.</p>;
   }
-
+console.log(journalDetails)
   return (
     <div>
       <img
@@ -100,6 +104,7 @@ const SingleJournalPage = () => {
       <h1>{journalDetails.journalName}</h1>
       <p>{journalDetails.journalDescription}</p>
       <p><strong>Location:</strong> {journalDetails.journalLocation}</p>
+      <p>{journalDetails.createdBy}</p>
       
       <div>
         <FontAwesomeIcon
