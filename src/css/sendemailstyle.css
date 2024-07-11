@@ -1,93 +1,61 @@
-body{
-    background: url("/public/assets/images/142154.png");
-    background-size: cover;
-}
-
-div.main{
-    padding: 80px 0 30px;
-}
-
-div.reset{
-    width: 50%;
-    height: 400px;
-    background: #fff;
-    margin: 0 auto;
-    border: 1px solid gainsboro;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-}
-
-div.reset .left{
-    float: left;
-    width: 60%;
-    height: 400px;
-    background: url("/public/assets/images/3275434.jpg");
-    background-size: cover;
-    box-sizing: border-box;
-}
-div.reset .right{
-    float: right;
-    width: 40%;
-    height: 400px;
-    box-sizing: border-box;
-}
-
-div.resetbox{
-    width: 100%;
-    padding: 70px 10px;
-    box-sizing: border-box;
-    height: 400px;
-    background: #fff;
-}
-div.resetbox h1{
-    text-align: left;
-    padding: 0;
+body {
+    font-family: sans-serif;
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    font-size: x-large;
-    
+    padding: 0;
+    background-image: url("/public/assets/images/checkemail.jpg");
+    /* Replace "mountains.jpg" with the path to your background image */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
 }
 
-form#fgt{
-    margin-right: 0px;
-    margin-top: 30px;
-    margin-bottom: 30px;
+.forgot-password-screen {
+    width: 350px;
+    background-color: #fff;
+    padding: 40px;
+    margin: 250px auto;
+    /* Increased margin-top from 100px to 150px */
+    width: 30%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-label{
-    font-family: sans-serif;
-    font-size: 14px;
-}
-input#bb{
-    width: 250px;
-    border: 1px solid #1f1f29;
-    border-radius: 3px;
-    outline: 0;
-    padding: 6px;
-    background-color: #e4ecec;
-    box-shadow: inset 1px 1px 5px rgba(0,0,0,0.3);
-}
-button#reset{
+h2 {
     text-align: center;
-    width: 150px;
-    padding: 8px;
-    font-size: 15px;
-    font-family: sans-serif;
-    font-weight: 500;
-    background-color: #FF8C8C;
-    border: 0,4px solid #e5e1e1;
-    cursor: pointer;
-    border-radius: 30px;
-    color: #101014;
-    box-shadow: 1px 1px 4px rgba(0,0,0,0.3);
     margin-bottom: 20px;
-    margin-left: 0px;
-} 
-label,h1{
-    text-shadow: 0px 0px 1px #101014;
-}
-div.lgn_link{
-    font-size: small;
 }
 
+p {
+    text-align: center;
+    color: #888;
+    margin-bottom: 20px;
+}
 
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="email"] {
+    width: 94%;
+    padding: 10px;
+    width: 370px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.forgot-password-screen button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    width: 50;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}

@@ -12,11 +12,12 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AddJournalPage from './pages/AddJournal';
 import ForgotPasswordCode from './pages/ForgetPasswordCode';
+import GalleryPage from './pages/Galleryy';
 import JournalPage from './pages/JournalPage';
 import Login from './pages/Login';
+import ProfilePage from './pages/ProfilePage';
 import ResetPassword from './pages/ResetPassword';
 import SendEmail from './pages/SendEmail';
-import ProfilePage from './pages/ProfilePage';
 import SingleJournalPage from './pages/SingleJournalPage';
 
 
@@ -40,6 +41,7 @@ function App() {
         <Route path='/add-journal' element={<AddJournalPage />} />
         <Route path='/journal/:_id' element={<SingleJournalPage />} />
         <Route path='/profile' element={<ProfilePage />} />
+        <Route path='/gallery' element={<GalleryPage />} />
 
 
         {/* <Route element={<UserRoutes />}>

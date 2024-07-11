@@ -1,47 +1,60 @@
-// import React, { useState, useEffect } from 'react';
-// // import './App.css';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getAllJournalsApi } from '../apis/Api';
+import '../css/Gallery.css';
 
-// const Galleryy = () => {
-//   const [posts, setPosts] = useState([]);
+const GalleryPage = () => {
+    const navigate = useNavigate();
+    const [journals, setJournals] = useState([]);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-//   useEffect(() => {
-//     fetch('https://api.example.com/posts') // Replace with your API URL
-//       .then(response => response.json())
-//       .then(data => setPosts(data))
-//       .catch(error => console.error('Error fetching posts:', error));
-//   }, []);
+    useEffect(() => {
+        const fetchJournals = async () => {
+            try {
+                const response = await getAllJournalsApi();
+                if (response.data && response.data.Journals) {
+                    setJournals(response.data.Journals);
+                }
+            } catch (err) {
+                console.error('Failed to fetch journals:', err);
+                setError('Failed to fetch journals');
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchJournals();
+    }, []);
 
-//   return (
-//     <div className="App">
-//       <Journal posts={posts} />
-//       <Gallery posts={posts} />
-//     </div>
-//   );
-// };
+    const handleReadMore = (id) => {
+        navigate(`/journal/${id}`);
+    };
 
-// const Journal = ({ posts }) => {
-//   return (
-//     <div className="journal">
-//       <h2>Journal</h2>
-//       {posts.map(post => (
-//         <div key={post.id} className="post">
-//           <p>{post.text}</p>
-//           {post.imageUrl && <img src={post.imageUrl} alt="post" />}
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
+    if (loading) {
+        return <p>Loading...</p>;
+    }
 
-// const Gallery = ({ posts }) => {
-//   return (
-//     <div className="gallery">
-//       <h2>Gallery</h2>
-//       {posts.filter(post => post.imageUrl).map(post => (
-//         <img key={post.id} src={post.imageUrl} alt="gallery" />
-//       ))}
-//     </div>
-//   );
-// };
+    if (error) {
+        return <p>{error}</p>;
+    }
 
-// export default Galleryy;
+    return (
+        <div>
+            <main>
+                {journals.length > 0 ? (
+                    journals.map((journal) => (
+                        <section key={journal._id} className="entry">
+                            <img
+                                src={journal.journalImageUrl}
+                            />
+                        </section>
+                    ))
+                ) : (
+                    <p>No images available.</p>
+                )}
+            </main>
+        </div>
+    );
+};
+
+export default GalleryPage;

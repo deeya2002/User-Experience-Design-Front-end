@@ -78,7 +78,7 @@ const Navbar = ({ size, setShow }) => {
                   aria-expanded="false"
                   style={{ minWidth: '190px' }} // Adjust width here
                 >
-                  Welcome, {user.fullName}
+                  Welcome, {user.fullname}
                 </button>
                 <ul className="dropdown-menu">
                   <li>
