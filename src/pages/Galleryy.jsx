@@ -39,15 +39,17 @@ const GalleryPage = () => {
     }
 
     return (
-        <div>
-            <main>
+        <div className="gallery-container">
+            <main className="gallery">
                 {journals.length > 0 ? (
                     journals.map((journal) => (
-                        <section key={journal._id} className="entry">
+                        <div key={journal._id} className="gallery-item" onClick={() => handleReadMore(journal._id)}>
                             <img
                                 src={journal.journalImageUrl}
+                                alt={journal.journalName}
+                                className="gallery-image"
                             />
-                        </section>
+                        </div>
                     ))
                 ) : (
                     <p>No images available.</p>

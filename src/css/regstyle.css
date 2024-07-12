@@ -44,7 +44,7 @@ div.regbox h1 {
     text-align: center;
     padding: 0;
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Times New Roman';
     font-weight: bold;
     font-size: x-large;
 
@@ -57,7 +57,7 @@ form#rg {
 }
 
 label {
-    font-family: sans-serif;
+    font-family: 'Times New Roman';
     font-size: 14px;
 }
 
@@ -76,7 +76,7 @@ button#sub {
     width: 150px;
     padding: 8px;
     font-size: 15px;
-    font-family: sans-serif;
+    font-family: 'Times New Roman';
     font-weight: 500;
     background-color: #1A68FF;
     border: 0, 4px solid #e5e1e1;

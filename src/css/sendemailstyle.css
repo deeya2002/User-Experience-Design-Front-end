@@ -1,9 +1,8 @@
 body {
-    font-family: sans-serif;
+    font-family: 'Times New Roman';
     margin: 0;
     padding: 0;
     background-image: url("/public/assets/images/checkemail.jpg");
-    /* Replace "mountains.jpg" with the path to your background image */
     background-size: cover;
     background-position: center;
     height: 100vh;

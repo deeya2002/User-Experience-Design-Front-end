@@ -21,10 +21,8 @@ body {
   margin-left: auto;
   display: flex;
   justify-content: flex-end;
-  /* Align items to the right */
   flex-wrap: wrap;
   width: 100%;
-  /* Make sure the container spans the full width */
   padding: 20px;
 }
 

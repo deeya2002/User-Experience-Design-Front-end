@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { sendEmailApi } from '../apis/Api';
 import '../css/sendemailstyle.css';
@@ -54,6 +54,7 @@ const SendEmail = () => {
       <button type="submit" id="reset" onClick={handleSubmit}>
         Continue
       </button>
+      <div className="lgn_link"><Link to="/">Back to Login</Link></div>
     </div>
   );
 };
