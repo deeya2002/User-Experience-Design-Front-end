@@ -1,6 +1,25 @@
 body {
-    background-image: url("../assets/images/registerimage.jpg");
     background-size: cover;
+}
+
+.register-background {
+    background-image: url('../assets/images/registerimage.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 120vh;
+    /* Adjust based on your needs */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    background: white;
+    /* Optional: to make sure the form is readable */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 div.main {
@@ -20,7 +39,6 @@ div.regs .left {
     float: left;
     width: 45%;
     height: 520px;
-    background: url("/public/assets/images/28142325.png");
     background-size: cover;
     box-sizing: border-box;
 }
@@ -44,7 +62,7 @@ div.regbox h1 {
     text-align: center;
     padding: 0;
     margin: 0;
-    font-family: 'Times New Roman';
+    font-family: sans-serif;
     font-weight: bold;
     font-size: x-large;
 
@@ -57,7 +75,7 @@ form#rg {
 }
 
 label {
-    font-family: 'Times New Roman';
+    font-family: sans-serif;
     font-size: 14px;
 }
 
@@ -76,7 +94,7 @@ button#sub {
     width: 150px;
     padding: 8px;
     font-size: 15px;
-    font-family: 'Times New Roman';
+    font-family: sans-serif;
     font-weight: 500;
     background-color: #1A68FF;
     border: 0, 4px solid #e5e1e1;

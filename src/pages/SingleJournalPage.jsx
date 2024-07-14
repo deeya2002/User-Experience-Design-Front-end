@@ -1,8 +1,9 @@
 import { faBookmark, faHeart, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { followUserApi, getSingleJournalApi, likeJournalApi, saveJournalApi } from '../apis/Api';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { createComment, followUserApi, getComments, getSingleJournalApi, likeJournalApi, saveJournalApi } from '../apis/Api';
 import '../css/PageStyle.css';
 
 const SingleJournalPage = () => {
@@ -10,10 +11,14 @@ const SingleJournalPage = () => {
   const [journalDetails, setJournalDetails] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [comments, setComments] = useState('');
   const [isFollowing, setIsFollowing] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const [commentText, setCommentText] = useState('');
+  const [comments, setComments] = useState([]);
+
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
     const fetchJournalDetails = async () => {
@@ -33,6 +38,22 @@ const SingleJournalPage = () => {
     fetchJournalDetails();
   }, [_id]);
 
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const response = await getComments(_id);
+        console.log(_id)
+        console.log(response.data?.comments[0]?.commentText)
+        // 
+        // [{_id: "6693cf1d9f88c41b7e33b5fb", commentText: "wowww", createdAt: "2024-07-14T13:14:05.129Z",…}]
+        setComments(response.data?.comments);
+      } catch (error) {
+        console.error("Error fetching comments:", error);
+      }
+    };
+    fetchComments();
+  }, []);
+
   const handleFollow = async () => {
     const data = {
       followeeId: journalDetails.createdBy
@@ -49,7 +70,12 @@ const SingleJournalPage = () => {
 
   const handleLike = async () => {
     try {
-      await likeJournalApi(isLiked);
+      console.log(_id)
+      const data = {
+        journal_id: _id,
+        user_id: user?._id
+      }
+      await likeJournalApi(data);
       setIsLiked(!isLiked);
     } catch (err) {
       console.error('Error liking journal:', err);
@@ -59,7 +85,12 @@ const SingleJournalPage = () => {
 
   const handleSave = async () => {
     try {
-      await saveJournalApi(_id);
+      console.log(_id)
+      const data = {
+        journal_id: _id,
+        user_id: user?._id
+      }
+      await saveJournalApi(data);
       setIsSaved(!isSaved);
     } catch (err) {
       console.error('Error saving journal:', err);
@@ -67,18 +98,25 @@ const SingleJournalPage = () => {
     }
   };
 
-  const handleComment = (event) => {
-    setComments(event.target.value);
-  };
+  const submitComment = async (e) => {
+    e.preventDefault();
 
-  const submitComment = async () => {
+    const formData = new FormData();
+    formData.append('commentText', commentText);
+    formData.append('journalId', journalDetails._id)
+
     try {
-      // Implement the API call for submitting a comment here
-      // await submitCommentApi(_id, comments);
-      setComments('');
+      const res = await createComment(formData);
+      if (res.data.success === false) {
+        toast.error(res.data.message);
+      } else {
+        toast.success(res.data.message);
+        setComments([...comments, res.data.comment]);
+        setCommentText('');
+      }
     } catch (err) {
-      console.error('Error commenting on journal:', err);
-      setError('Failed to comment on journal');
+      console.error(err);
+      toast.error('Comment has already been created!');
     }
   };
 
@@ -117,7 +155,9 @@ const SingleJournalPage = () => {
             onClick={handleLike}
             style={{ cursor: 'pointer', color: isLiked ? 'red' : 'black', marginLeft: '10px' }}
             title={isLiked ? 'Unlike' : 'Like'}
+
           />
+          <p>({journalDetails.likes.length})</p>
           <FontAwesomeIcon
             icon={faBookmark}
             onClick={handleSave}
@@ -156,18 +196,27 @@ const SingleJournalPage = () => {
               Please read our Comment Policy before commenting.
             </p>
           </section>
-          <h3>Comments (0)</h3>
-          <form action="#" method="post">
+          <h3>Comments ({comments.length})</h3>
+          <form onSubmit={submitComment}>
             <textarea
-              name="comment" rows="5"
+              name="comment"
+              rows="5"
               placeholder="Write a comment..."
-              onChange={handleComment}></textarea>
-            <button type="submit"
-              onClick={submitComment} >Comment</button>
+              value={commentText}
+              onChange={(e) => setCommentText(e.target.value)}
+            ></textarea>
+            <button type="submit">Comment</button>
           </form>
+          <div className="comments-list">
+            {comments.map((comment, index) => (
+              <div key={index} className="comment">
+                <p><strong>{comment.userDetails.username}</strong></p>
+                <p>{comment.commentText}</p>
+              </div>
+            ))}
+          </div>
         </section>
       </main>
-
     </div>
   );
 };

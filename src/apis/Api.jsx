@@ -50,20 +50,20 @@ export const deleteJournalApi = id =>
   Api.delete(`/api/journal/me/${id}`, config);
 
 //like journal
-export const likeJournalApi = id =>
-  Api.post(`/api/journal/${id}/like`, config);
+export const likeJournalApi = data =>
+  Api.post(`/api/journal/like`, data);
 
 //unlike journal
-export const unlikeJournalApi = id =>
-  Api.post(`/api/journal/${id}/unlike`, config);
+export const unlikeJournalApi = data =>
+  Api.post(`/api/journal/unlike`, data);
 
 //save journal
-export const saveJournalApi = id =>
-  Api.post(`/api/journal/${id}/save`, config);
+export const saveJournalApi = data =>
+  Api.post(`/api/journal/save`, data);
 
 //unsave journal
-export const unsaveJournalApi = id =>
-  Api.post(`/api/journal/${id}/unsave`, config);
+export const unsaveJournalApi = data =>
+  Api.post(`/api/journal/unsave`, data);
 
 //unsave journal
 export const followUserApi = data =>
@@ -84,9 +84,24 @@ export const getSingleUserApi = data =>
   Api.post(`/api/user/getuser`, data);
 
 
-export const updateUserProfileApi = formData =>
-  Api.put(`/api/user/updateuser`, formData, config);
+export const updateUserProfileApi = (userid, formData) =>
+  Api.put(`/api/user/updateuser/${userid}`, formData, config);
 
 //Search APi
 export const searchByJournalName = formData =>
   Api.post('/api/journal/searchjournal', formData);
+
+//Comments Api
+export const createComment = formData =>
+  Api.post('/api/comment/create_comment', formData, config);
+
+// get comments API
+export const getComments = id =>
+  Api.get(`/api/comment/get_comments/${id}`);
+
+export const deleteComment = id =>
+  Api.delete(`/api/comment/delete_comment/${id}`, config);
+
+// create feedback API
+export const createFeedbackApi = formData =>
+  Api.post('/api/feedback/createfeedback', formData, config);

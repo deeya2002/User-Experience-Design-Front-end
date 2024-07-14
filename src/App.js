@@ -10,7 +10,11 @@ import Register from './pages/Register';
 // for showing toast messages
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AboutUs from './pages/AboutUs';
 import AddJournalPage from './pages/AddJournal';
+import ContactUs from './pages/Contact';
+import EditJournal from './pages/EditJournalPage';
+import EditProfile from './pages/EditProfile';
 import ForgotPasswordCode from './pages/ForgetPasswordCode';
 import GalleryPage from './pages/Galleryy';
 import JournalPage from './pages/JournalPage';
@@ -42,6 +46,11 @@ function App() {
         <Route path='/journal/:_id' element={<SingleJournalPage />} />
         <Route path='/profile' element={<ProfilePage />} />
         <Route path='/gallery' element={<GalleryPage />} />
+        <Route path='/about' element={<AboutUs />} />
+        <Route path='/contact' element={<ContactUs />} />
+        <Route path='/editprofile' element={<EditProfile />} />
+        <Route path='/editjournal/:id' element={<EditJournal />} />
+
 
 
         {/* <Route element={<UserRoutes />}>

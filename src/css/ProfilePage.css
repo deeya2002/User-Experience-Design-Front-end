@@ -1,33 +1,7 @@
 body {
-  font-family: 'Times New Roman';
+  font-family: sans-serif;
   margin: 0;
   padding: 0;
-}
-
-header {
-  background-color: #ffffff;
-  padding: 20px;
-}
-
-
-nav {
-  text-align: left;
-}
-
-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-nav li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-nav a {
-  text-decoration: none;
-  color: black;
 }
 
 main {
@@ -36,10 +10,12 @@ main {
 
 main {
   padding: 20px;
+  background-color: #fff;
 }
 
 section {
   margin-bottom: 20px;
+  border-radius: 20px;
 }
 
 .about-me {
@@ -52,6 +28,7 @@ section {
   margin-right: 5%;
   margin-top: 3%;
   border: 1px solid #ddd;
+  border-radius: 20px;
 }
 
 .about-me p {
@@ -67,10 +44,12 @@ section {
   margin-left: 5%;
   margin-top: 3%;
   border: 1px solid #ddd;
+  border-radius: 20px;
 
 }
 
 .recents .journal img {
+  border-radius: 20px;
   max-width: 650px;
   max-height: 300px;
   object-fit: cover;
@@ -79,22 +58,22 @@ section {
 
 .recents .journal {
   margin-bottom: 20px;
-  /* Optional: Add space between journal items */
+  border-radius: 20px;
 }
 
 .info {
   padding: 10px;
-
   border-radius: 5px;
 }
 
 .info .user-info {
   text-decoration: underline;
+
 }
 
 .info img {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   display: block;
   margin: 0 auto;
@@ -103,6 +82,7 @@ section {
 
 .user-info p {
   margin-bottom: 5px;
+  text-align: left;
 }
 
 button[type="submit"] {

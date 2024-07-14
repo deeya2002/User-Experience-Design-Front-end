@@ -1,8 +1,5 @@
-/* AddJournalPage.css */
-
 .add-journal-container {
-  font-family: 'Times New Roman';
-  /* Font family */
+  font-family: sans-serif ;
   margin: 20px auto;
   max-width: 800px;
   padding: 20px;

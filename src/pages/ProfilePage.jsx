@@ -3,11 +3,12 @@ import { FaEdit, FaTrash } from 'react-icons/fa'; // Import icons from react-ico
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for page navigation
 import { toast } from 'react-toastify';
 import { deleteJournalApi, getSingleUserApi, getUserJournalApi } from '../apis/Api';
-import '../css/Profile.css';
+import '../css/ProfilePage.css';
 
 const ProfilePage = () => {
   const navigate = useNavigate(); // Initialize navigate function
   const user = JSON.parse(localStorage?.getItem("user")) || null;
+
 
   // State to manage user data
   const [fullname, setFullName] = useState('');
@@ -17,6 +18,7 @@ const ProfilePage = () => {
   const [location, setLocation] = useState('');
   const [bio, setBio] = useState('');
   const [occupation, setOccupation] = useState('');
+  const [userImageUrl, setUserImage] = useState('');
 
   const [journals, setJournals] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -34,6 +36,7 @@ const ProfilePage = () => {
         setLocation(res.data.singleuser.location ?? '');
         setBio(res.data.singleuser.bio ?? '');
         setOccupation(res.data.singleuser.occupation ?? '');
+        setUserImage(res.data.singleuser.userImageUrl ?? '');
       })
       .catch(error => {
         console.error('Error fetching user data:', error);
@@ -55,9 +58,9 @@ const ProfilePage = () => {
     fetchUserJournals();
   }, [user?._id]);
 
-  const handleEdit = (journalId) => {
-    // Logic to edit the journal
-    console.log(`Edit journal with ID: ${journalId}`);
+  const handleEdit = (id) => {
+    console.log("fjghdfhgfh", id)
+    navigate(`/editjournal/${id}`)
   };
 
   const handleDelete = (id) => {
@@ -80,8 +83,9 @@ const ProfilePage = () => {
     navigate(`/journal/${journalId}`); // Navigate to the journal page
   };
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  const handleClick = () => {
+    navigate('/editprofile');
+  };
 
   return (
     <div>
@@ -92,7 +96,9 @@ const ProfilePage = () => {
         </section>
         <section className="recents">
           <p style={{ textDecoration: 'underline', fontWeight: 'bold' }}>Recent Posts</p>
-          {journals.length > 0 ? (
+          {loading ? (
+            <div>Loading...</div>
+          ) : journals.length > 0 ? (
             journals.map(journal => (
               <div
                 key={journal._id}
@@ -113,19 +119,29 @@ const ProfilePage = () => {
         </section>
         <section className="profile">
           <div className="info">
-            <img src="/assets/images/dpic.jpg" alt="profile-pic" className="profile-pic" />
+            <img
+              src={userImageUrl || "/assets/images/noavatar.jpg"}
+              alt="profile-pic"
+              className="profile-pic"
+            />
             <h3 style={{ textDecoration: 'underline' }}>My Profile</h3>
-            <p>Love to travel and adventure!</p>
+            <br></br>
             <div className="user-info">
-              <p>{fullname}</p>
-              <p>{username}</p>
-              <p>{number}</p>
-              <p>{email}</p>
-              <p>{location}</p>
-              <p>{occupation}</p>
+              <p>Full Name : {fullname}  </p>
+              <br></br>
+              <p>User Name : {username}</p>
+              <br></br>
+              <p>Phone Number : {number}</p>
+              <br></br>
+              <p>My Email : {email}</p>
+              <br></br>
+              <p>Location : {location}</p>
+              <br></br>
+              <p>Occupation : {occupation}</p>
+              <br></br>
             </div>
           </div>
-          <button type="button" onClick={() => { window.location.href = '#'; }}>
+          <button type="button" onClick={handleClick}>
             Edit Profile
           </button>
         </section>
@@ -135,3 +151,6 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
+
+
+

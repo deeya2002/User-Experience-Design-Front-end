@@ -24,7 +24,7 @@ const Navbar = ({ size, setShow }) => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg" style={{ backgroundColor: '#f8f9fa', fontFamily: 'Times New Roman' }}>
+    <nav className="navbar navbar-expand-lg" style={{ backgroundColor: '#f8f9fa', fontFamily: "sans-serif" }}>
       <div className="container-fluid">
         <Link className="navbar-brand text-danger fw-bold" to="/">
           <img

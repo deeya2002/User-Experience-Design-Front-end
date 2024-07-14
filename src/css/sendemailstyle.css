@@ -1,60 +1,63 @@
-body {
-    font-family: 'Times New Roman';
-    margin: 0;
-    padding: 0;
-    background-image: url("/public/assets/images/checkemail.jpg");
+/* sendemailstyle.css */
+
+.send-email-background {
+    background-image: url('/public/assets/images/forgetpassword.jpg');
+    /* Adjust the URL to your image path */
     background-size: cover;
     background-position: center;
-    height: 100vh;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    /* Ensure it covers the full height of the viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .forgot-password-screen {
-    width: 350px;
-    background-color: #fff;
-    padding: 40px;
-    margin: 250px auto;
-    /* Increased margin-top from 100px to 150px */
-    width: 30%;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-p {
-    text-align: center;
-    color: #888;
-    margin-bottom: 20px;
+    background-color: #F0F0F0;
+    /* Background for form container */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    /* Adjust based on your design needs */
+    box-sizing: border-box;
+    /* Include padding and border in the element's total width and height */
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
-label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-input[type="email"] {
-    width: 94%;
+.form-group input {
+    width: 100%;
     padding: 10px;
-    width: 370px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box;
+    /* Include padding and border in the element's total width and height */
 }
 
-.forgot-password-screen button {
+#reset {
     background-color: #007bff;
     color: #fff;
     padding: 10px 20px;
-    width: 50;
-    height: 40px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 100%;
+    display: block;
+    margin: 20px auto 0;
+    /* Adjust margin to space out from form elements */
+    text-align: center;
+}
+
+#reset:hover {
+    background-color: #0056b3;
+    /* Darker color on hover */
+}
+
+.lgn_link {
+    text-align: center;
+    margin-top: 20px;
 }
