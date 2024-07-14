@@ -1,8 +1,9 @@
+
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { createFeedbackApi } from '../apis/Api';
+import womenimage from '../assets/images/contact.png';
 import '../css/contactstyle.css';
-
 const ContactUs = () => {
     const [fullname, setFullName] = useState('');
     const [email, setEmail] = useState('');
@@ -32,58 +33,65 @@ const ContactUs = () => {
     };
 
     return (
-        <div className="contact-us-background">
-            <div className="form-container">
-                <h1>Contact Us</h1>
-                <div className="input-group">
-                    <label htmlFor="name">Name</label><br />
-                    <input
-                        type="text"
-                        placeholder="Please enter your name"
-                        id="name"
-                        name="name"
-                        value={fullname}
-                        onChange={(e) => setFullName(e.target.value)}
-                        required
-                    />
-                </div>
+        <div className='center'>
+            <div className="row">
+                <div className="col-sm-6">
+                    <div className="form-container">
+                        <h1>Contact Us</h1>
+                        <div className="input-group">
+                            <label htmlFor="name">Name</label><br />
+                            <input
+                                type="text"
+                                placeholder="Please enter your name"
+                                id="name"
+                                name="name"
+                                value={fullname}
+                                onChange={(e) => setFullName(e.target.value)}
+                                required
+                            />
+                        </div>
 
-                <div className="input-group">
-                    <label htmlFor="emailll">Email</label><br />
-                    <input
-                        type="text"
-                        placeholder="Please enter your email"
-                        id="emaill"
-                        name="emaill"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
+                        <div className="input-group">
+                            <label htmlFor="emailll">Email</label><br />
+                            <input
+                                type="text"
+                                placeholder="Please enter your email"
+                                id="emaill"
+                                name="emaill"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="phone">Phone Number</label><br />
+                            <input
+                                type="tel"
+                                placeholder="Please enter your phone"
+                                id="phone"
+                                name="phone"
+                                value={number}
+                                onChange={(e) => setNumber(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="message">Message</label><br />
+                            <textarea
+                                placeholder="Please enter your message"
+                                id="message"
+                                name="message"
+                                value={message}
+                                onChange={(e) => setMessage(e.target.value)}
+                                required
+                            ></textarea>
+                        </div>
+                        <button type="submit" onClick={handleSubmit}>Submit</button>
+                    </div>
                 </div>
-                <div className="input-group">
-                    <label htmlFor="phone">Phone Number</label><br />
-                    <input
-                        type="tel"
-                        placeholder="Please enter your phone"
-                        id="phone"
-                        name="phone"
-                        value={number}
-                        onChange={(e) => setNumber(e.target.value)}
-                        required
-                    />
+                <div className="col-sm-2 ">
+                    <img src={womenimage} alt="Contact Us" />
                 </div>
-                <div className="input-group">
-                    <label htmlFor="message">Message</label><br />
-                    <textarea
-                        placeholder="Please enter your message"
-                        id="message"
-                        name="message"
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        required
-                    ></textarea>
-                </div>
-                <button type="submit" onClick={handleSubmit}>Submit</button>
             </div>
         </div>
     );

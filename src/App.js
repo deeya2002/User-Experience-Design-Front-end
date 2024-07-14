@@ -1,7 +1,8 @@
 import {
   Route,
   BrowserRouter as Router,
-  Routes
+  Routes,
+  useLocation
 } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Homepage from './pages/Homepage';
@@ -27,9 +28,18 @@ import SingleJournalPage from './pages/SingleJournalPage';
 
 
 function App() {
+  const DisplayNavbar = () => {
+    const location = useLocation();
+    const hideNavbarRoutes = ['/login', '/register'];
+
+    if (hideNavbarRoutes.includes(location.pathname.toLowerCase())) {
+      return null;
+    }
+    return <Navbar />;
+  };
   return (
     <Router>
-      <Navbar />
+      <DisplayNavbar />
       <ToastContainer />
       <Routes>
         <Route path='/home' element={<Homepage />} />
