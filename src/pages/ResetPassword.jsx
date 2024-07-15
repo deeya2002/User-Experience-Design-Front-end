@@ -48,9 +48,10 @@ const ResetPassword = () => {
   };
 
   return (
+    <div className="password-background">
     <div className="reset-screen">
       <h2>Create a new password</h2>
-      <form onSubmit={handleChangePasswordSubmit} id="reset-form">
+      {/* <form onSubmit={handleChangePasswordSubmit} id="reset-form"> */}
         <label htmlFor="newPassword">Enter new password</label>
         <input
           type="password"
@@ -70,10 +71,11 @@ const ResetPassword = () => {
           onChange={handleChangeConfirmPassword}
         />
         <br />
-      </form>
+      {/* </form> */}
       <button type="submit" id="submit">
         Submit
       </button>
+    </div>
     </div>
   );
 };

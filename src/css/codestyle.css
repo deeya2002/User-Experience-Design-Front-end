@@ -8,6 +8,20 @@ body {
     height: 100vh;
 }
 
+.verify-email-background {
+    background-image: url('/public/assets/images/checkemail.jpg');
+    /* Adjust the URL to your image path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    /* Ensure it covers the full height of the viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 .verify-screen {
     width: 400px;
     background-color: #fff;

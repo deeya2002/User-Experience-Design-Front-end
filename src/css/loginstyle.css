@@ -4,6 +4,7 @@ body {
   background-size: cover;
   background-position: center;
 }
+
 .login-form-background {
   background-image: url("/public/assets/images/loginwal.jpg");
   background-size: cover;
@@ -59,7 +60,7 @@ body {
 }
 
 .form-container {
-  width: 50%;
+  width: 100%;
   /* Adjust width as needed */
   max-width: 500px;
   /* Add a max-width to prevent it from getting too wide */

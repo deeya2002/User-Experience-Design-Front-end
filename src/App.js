@@ -11,6 +11,7 @@ import Register from './pages/Register';
 // for showing toast messages
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Footer from './components/Footer';
 import AboutUs from './pages/AboutUs';
 import AddJournalPage from './pages/AddJournal';
 import ContactUs from './pages/Contact';
@@ -36,6 +37,16 @@ function App() {
       return null;
     }
     return <Navbar />;
+  };
+
+  const DisplayFooter = () => {
+    const location = useLocation();
+    const hideFooterRoutes = ['/login', '/register', '/gallery', '/profile'];
+
+    if (hideFooterRoutes.includes(location.pathname.toLowerCase())) {
+      return null;
+    }
+    return <Footer />;
   };
   return (
     <Router>
@@ -70,6 +81,7 @@ function App() {
 
 
       </Routes>
+      <DisplayFooter />
 
     </Router>
   );

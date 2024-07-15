@@ -14,6 +14,9 @@ const config = {
   },
 };
 
+// const token = getToken();
+console.log('Token:', config);
+
 // Creating test api
 export const testApi = () => Api.get('/test');
 // http://localhost:5000//test

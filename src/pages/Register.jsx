@@ -98,7 +98,7 @@ const Register = () => {
             type="text"
             id="emaill"
             name="email"
-            value={userName.toLowerCase().replace(/ /g, "")}
+            value={email.toLowerCase().replace(/ /g, "")}
             onChange={changeEmail}
             placeholder="Email"
             required

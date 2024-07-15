@@ -16,8 +16,8 @@ const EditProfile = () => {
     const [location, setLocation] = useState('');
     const [bio, setBio] = useState('');
     const [occupation, setOccupation] = useState('');
-    const [userImage, setUserImage] = useState(''); // State for profile picture
-    const [userImageFile, setUserImageFile] = useState(null); // State for the image file
+    const [userImage, setUserImage] = useState('');
+    const [userImageFile, setUserImageFile] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 

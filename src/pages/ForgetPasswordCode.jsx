@@ -39,6 +39,7 @@ const ForgotPasswordCode = () => {
   };
 
   return (
+    <div className="verify-email-background">
     <div className="verify-screen">
       <h1>Check Your Email</h1>
       <p>
@@ -58,12 +59,13 @@ const ForgotPasswordCode = () => {
 
       </form>
       <br />
-      <button type="submit" id="verify">
+      <button type="submit" id="verify" onClick={handleVerifyCode}>
         Verify
       </button>
       <div className="resend_link">
         Didn't get a code? <a href="/sendemail">Click to resend</a>
       </div>
+    </div>
     </div>
   );
 };

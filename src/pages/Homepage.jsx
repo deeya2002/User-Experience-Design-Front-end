@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { getAllJournalsApi, searchByJournalName } from '../apis/Api';
 import searchIcon from '../assets/icon/search.png'; // Add your image path here
 import '../css/homestyle.css';
@@ -8,17 +8,17 @@ const Homepage = () => {
   const [journals, setJournals] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
   const searchDat = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('journalName', searchQuery);
-  
+
     try {
       const response = await searchByJournalName(formData);
-  
+
       if (response.data?.journalNames && response.data.journalNames.length > 0) {
         const firstResultId = response.data.journalNames[0]._id;
         navigate(`/journal/${firstResultId}`);
@@ -68,39 +68,41 @@ const Homepage = () => {
       </header>
       <section id="journals" className="journals-section">
         <div className="search-box">
-        <form onSubmit={searchDat}>
-          <input 
-            type="text" 
-            placeholder="Search your journals..." 
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <img 
-            src={searchIcon} 
-            alt="Search" 
-            className="search-icon" 
-          />
+          <form onSubmit={searchDat}>
+            <input
+              type="text"
+              placeholder="Search your journals..."
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <img
+              src={searchIcon}
+              alt="Search"
+              className="search-icon"
+            />
           </form>
         </div>
-        <h2>Your Journals</h2>
+        <h2>Journals</h2>
         <div className="journal-list">
           {journals.map((journal) => (
-              console.log("helo"+ journal.createdBy),
-            <div key={journal._id} className="journal-item">
+            <div
+              key={journal._id}
+              className="journal-item"
+              onClick={() => navigate(`/journal/${journal._id}`)} // Navigate to the journal detail page on click
+            >
               <p>By {journal.userDetails.username}</p>
-            
               <p className="journal-location">{journal.journalLocation}</p>
-              <img src={journal.journalImageUrl} alt={journal.journalName} className="journal-image" />
+              <img
+                src={journal.journalImageUrl}
+                alt={journal.journalName}
+                className="journal-image"
+              />
               <div className="journal-details">
                 <h3>{journal.journalName}</h3>
-
               </div>
             </div>
           ))}
         </div>
       </section>
-      <footer>
-        <p>&copy; 2024 Travel Log. All rights reserved.</p>
-      </footer>
     </div>
   );
 }
